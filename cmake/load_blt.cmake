@@ -14,8 +14,15 @@ if (NOT BLT_LOADED)
       git submodule update")
     endif ()
   endif ()
-
   include(${BLT_SOURCE_DIR}/SetupBLT.cmake)
 endif()
-
+  
+include(${BLT_SOURCE_DIR}/cmake/BLTMacros.cmake)
+if (NOT EXISTS ${BLT_SOURCE_DIR}/cmake/BLTMacros.cmake)
+    message(FATAL_ERROR "COULDNT FIND BLT MACROS")
+else()
+    file(READ ${BLT_SOURCE_DIR}/cmake/BLTMacros.cmake file_contents)
+    message(STATUS "KEYWORD ${BLT_SOURCE_DIR}")
+    message(STATUS "heres all the macros ${file_contents}")
+endif()
 blt_install_tpl_setups(DESTINATION lib/cmake/camp)
